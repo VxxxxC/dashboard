@@ -5,10 +5,13 @@ services:
     ports:
       - "8501:8501"
     environment:
-        - AUTH_SYSTEM_ENABLED=False
+        # Set AUTH_SYSTEM_ENABLED=False only in trusted local environments.
+        # It is enabled by default; disabling it exposes all private pages without authentication.
+        - AUTH_SYSTEM_ENABLED=True
         - BACKEND_API_HOST=backend-api
         - BACKEND_API_PORT=8000
-        - BACKEND_API_USERNAME=admin
-        - BACKEND_API_PASSWORD=admin
+        # IMPORTANT: Change these credentials before deploying to a shared or public environment.
+        - BACKEND_API_USERNAME=${BACKEND_API_USERNAME:-admin}
+        - BACKEND_API_PASSWORD=${BACKEND_API_PASSWORD:?BACKEND_API_PASSWORD must be set (via .env file or shell export). See credentials.yml.example for setup instructions.}
     volumes:
       - .:/home/dashboard

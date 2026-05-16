@@ -73,6 +73,15 @@ def get_backend_api_client():
 
     from CONFIG import BACKEND_API_HOST, BACKEND_API_PASSWORD, BACKEND_API_PORT, BACKEND_API_USERNAME
 
+    # Warn operators when default / empty credentials are still in use
+    if BACKEND_API_USERNAME == "admin" and not BACKEND_API_PASSWORD:
+        st.warning(
+            "⚠️ **Security warning:** Backend API password is not set. "
+            "Set the `BACKEND_API_PASSWORD` environment variable (and optionally "
+            "`BACKEND_API_USERNAME`) before exposing this service to a network.",
+            icon="⚠️",
+        )
+
     # Use Streamlit session state to store singleton instance
     if 'backend_api_client' not in st.session_state or st.session_state.backend_api_client is None:
         try:

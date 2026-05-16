@@ -9,6 +9,10 @@ __pycache__/
 secrets.toml
 .idea/*
 
+# Credentials file – contains hashed passwords and cookie secrets.
+# Copy credentials.yml.example to credentials.yml and fill in your own values.
+credentials.yml
+
 # Distribution / packaging
 .Python
 build/
